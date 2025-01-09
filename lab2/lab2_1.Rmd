@@ -24,8 +24,13 @@ In order to access the potential of R we need to assign values or other types of
 
 Assign a value to object 'x'. The '<-' symbol is read as 'gets'. In this case, x gets 42. Make sure that you are in the environment panel and you should see the value associated with 'x'. On a mac, you can push `option` and `-` to automatically generate the gets symbol.  
 ```{r}
-x <- 42
+x <- 42 # x gets 42
 ```
+
+```{r}
+x
+```
+
 
 To print the object to the screen, just type x.  
 ```{r}
@@ -36,6 +41,14 @@ Assign a value of 30 to a new object y.
 ```{r}
 y <- 30
 ```
+```{r}
+y
+```
+```{r}
+w <- 15
+```
+
+
 
 The = symbol works, but is not a convention followed by most programmers.
 ```{r}
@@ -99,9 +112,23 @@ mean(c(2, 8, 2))
 ## Practice
 1. Create three new objects, `venom_GT`, `chiron`, and `veyron`. These are the fastest cars in the world. Assign each car to its top speed. The venom_GT can go 270, chiron is 261, and veyron is 268.  
 
+```{r}
+venom_GT <- 270
+chiron <- 261
+veyron <- 268
+```
+
 2. Use arithmetic to calculate the mean top speed for the cars.
 
+```{r}
+(270+261+268)/3
+```
+
 3. Use the function `mean()` to calculate the mean top speed for the cars.
+```{r}
+mean(c(venom_GT,chiron,veyron))
+```
+
 
 ## Types of Data
 There are four frequently used `classes` of data: 1. numeric, 2. integer, 3. character, 4. logical.
@@ -118,6 +145,10 @@ class(my_numeric)
 class(my_integer)
 ```
 
+```{r}
+class(my_logical)
+```
+
 You can use the `is()` and `as()` functions to clarify or specify a type of data.
 ```{r}
 is.integer(my_numeric) #is my_numeric an integer?
@@ -126,6 +157,10 @@ is.integer(my_numeric) #is my_numeric an integer?
 ```{r}
 my_integer <- 
   as.integer(my_numeric) #create a new object specified as an integer
+
+#can be used to change the cass of an object
+
+
 ```
 
 ```{r}
@@ -156,9 +191,19 @@ new_vector <- c(7, 6.2, 5, 9, NA, 4, 9.8, 7, 3, 2)
 
 2. Calculate the mean of `new_vector`.
 
+```{r}
+mean(c(new_vector))
+```
+
 3. How do you interpret this result? What does this mean about NAs?  
 
+There is a missing number. R does not calculate the mean if there is a missing number.
+
 4. Recalculate the mean using the following code chunk. Why is the useful?  
+```{r}
+mean(new_vector, na.rm=T) #na.rm will remove an NA and calculate the mean
+```
+
 
 ## That's it! Let's take a break and then move on to part 2!
 
