@@ -37,6 +37,7 @@ height_meters <- c(8849, 8611, 8586, 8516, 8485)
 **5. Combine these vectors into a data frame called `mountains`.**
 ```{r}
 data.frame(name,height_feet,height_meters)
+mountains <- data.frame(name,height_feet,height_meters,first_climbed,summits,fatalities)
 ```
 
 **6. What is the mean height of the mountains in feet?**
@@ -46,17 +47,20 @@ mean(height_feet)
 
 **7. When were each of these mountains first climbed (i.e. in what year)? Make a new vector `first_climbed` and add it to the `mountains` data frame.**
 ```{r}
-
+first_climbed <- c(1953,1954,1955,1956,1955)
+data.frame(name,height_feet,height_meters,first_climbed)
 ```
 
 **8. How many times have each of these mountains been climbed? Make a new vector `summits` and add it to the `mountains` data frame.**
 ```{r}
-
+summits <- c(12884,800,312,933,560)
+data.frame(name,height_feet,height_meters,first_climbed,summits)
 ```
 
 **9. Which mountain has the highest number of fatalities? Make a new vector `fatalities` and add it to the `mountains` data frame.**
 ```{r}
-
+fatalities <- c(340,96,52,22,22)
+data.frame(name,height_feet,height_meters,first_climbed,summits,fatalities)
 ```
 
 **10. Write your data frame to a .csv file.**
