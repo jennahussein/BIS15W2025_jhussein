@@ -1,7 +1,7 @@
 ---
 title: "Homework 2"
 author: "Jenna Hussein"
-date: "2025-01-09"
+date: "2025-01-10"
 output:
   html_document: 
     theme: spacelab
@@ -130,7 +130,7 @@ data.frame(name,height_feet,height_meters,first_climbed,summits,fatalities)
 ## 4        Lhotse       27940          8516          1956     933         33
 ## 5        Makalu       27838          8485          1955     560         48
 ```
-
+Mount Everest has the highest number of fatalities
 **10. Write your data frame to a .csv file.**
 
 ``` r
