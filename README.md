@@ -1,5 +1,5 @@
 # About Me 
-My name is Jenna Hussein, I'm a fourth year undergraduate student majoring in Genetics and Genomics and UC Davis. My one thing I want to gain from undergrad is getting a well rounded education, meeting new people, and making connections. I LOVE getting philosophical and asking open-ended, thought-provoking questions. The best way to reach me is by email which is jenhussein@ucdavis.edu.
+My name is Jenna Hussein, I'm a fourth year undergraduate student majoring in Genetics and Genomics at UC Davis. My one thing I want to gain from undergrad is getting a well rounded education, meeting new people, and making connections. I LOVE getting philosophical and asking open-ended, thought-provoking questions. The best way to reach me is by email which is jenhussein@ucdavis.edu.
 
 Some random facts about me:
 
