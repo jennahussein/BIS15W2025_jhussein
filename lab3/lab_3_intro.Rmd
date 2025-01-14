@@ -20,10 +20,18 @@ library("jpeg")
 
 ## Review from last time
 ### *With a partner, discuss the following questions*
-1. What is a path? How do we know that we have a correct path?  
+1. What is a path? How do we know that we have a correct path?
+
+A path is something that tells us where we are.
+
 2. What is a local path? What is a global path?  
+
+A local path is the path on this computer.
+A global path is a path that orients a URL or a web address. It lives online not just in this computer
+
 3. How does a path relate to a working directory in R?  
 
+A path relates to a working directory in R because 
 ## Shut Down Procedures
 1. Save your work.  
 2. Commit and push your work to GitHub using GitHub Desktop.  

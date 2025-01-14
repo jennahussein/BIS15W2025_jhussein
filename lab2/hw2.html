@@ -11,7 +11,7 @@
 
 <meta name="author" content="Jenna Hussein" />
 
-<meta name="date" content="2025-01-10" />
+<meta name="date" content="2025-01-14" />
 
 <title>Homework 2</title>
 
@@ -376,7 +376,7 @@ display: none;
 
 <h1 class="title toc-ignore">Homework 2</h1>
 <h4 class="author">Jenna Hussein</h4>
-<h4 class="date">2025-01-10</h4>
+<h4 class="date">2025-01-14</h4>
 
 </div>
 
@@ -432,44 +432,26 @@ feet?</strong></p>
 what year)? Make a new vector <code>first_climbed</code> and add it to
 the <code>mountains</code> data frame.</strong></p>
 <pre class="r"><code>first_climbed &lt;- c(1953,1954,1955,1956,1955)
-data.frame(name,height_feet,height_meters,first_climbed)</code></pre>
-<pre><code>##            name height_feet height_meters first_climbed
-## 1 Mount_Everest       29032          8849          1953
-## 2            K2       28251          8611          1954
-## 3 Kangchenjunga       28169          8586          1955
-## 4        Lhotse       27940          8516          1956
-## 5        Makalu       27838          8485          1955</code></pre>
+mountains &lt;- data.frame(name,height_feet,height_meters,first_climbed)</code></pre>
 <p><strong>8. How many times have each of these mountains been climbed?
 Make a new vector <code>summits</code> and add it to the
 <code>mountains</code> data frame.</strong></p>
 <pre class="r"><code>summits &lt;- c(12884,800,312,933,560)
-data.frame(name,height_feet,height_meters,first_climbed,summits)</code></pre>
-<pre><code>##            name height_feet height_meters first_climbed summits
-## 1 Mount_Everest       29032          8849          1953   12884
-## 2            K2       28251          8611          1954     800
-## 3 Kangchenjunga       28169          8586          1955     312
-## 4        Lhotse       27940          8516          1956     933
-## 5        Makalu       27838          8485          1955     560</code></pre>
+mountains &lt;- data.frame(name,height_feet,height_meters,first_climbed,summits)</code></pre>
 <p><strong>9. Which mountain has the highest number of fatalities? Make
 a new vector <code>fatalities</code> and add it to the
 <code>mountains</code> data frame.</strong></p>
 <pre class="r"><code>fatalities &lt;- c(340,96,52,33,48)
-data.frame(name,height_feet,height_meters,first_climbed,summits,fatalities)</code></pre>
-<pre><code>##            name height_feet height_meters first_climbed summits fatalities
-## 1 Mount_Everest       29032          8849          1953   12884        340
-## 2            K2       28251          8611          1954     800         96
-## 3 Kangchenjunga       28169          8586          1955     312         52
-## 4        Lhotse       27940          8516          1956     933         33
-## 5        Makalu       27838          8485          1955     560         48</code></pre>
+mountains &lt;- data.frame(name,height_feet,height_meters,first_climbed,summits,fatalities)</code></pre>
 <p>Mount Everest has the highest number of fatalities <strong>10. Write
 your data frame to a .csv file.</strong></p>
 <pre class="r"><code>write.csv(mountains, row.names = FALSE)</code></pre>
-<pre><code>## &quot;name&quot;,&quot;height_feet&quot;,&quot;height_meters&quot;
-## &quot;Mount_Everest&quot;,29032,8849
-## &quot;K2&quot;,28251,8611
-## &quot;Kangchenjunga&quot;,28169,8586
-## &quot;Lhotse&quot;,27940,8516
-## &quot;Makalu&quot;,27838,8485</code></pre>
+<pre><code>## &quot;name&quot;,&quot;height_feet&quot;,&quot;height_meters&quot;,&quot;first_climbed&quot;,&quot;summits&quot;,&quot;fatalities&quot;
+## &quot;Mount_Everest&quot;,29032,8849,1953,12884,340
+## &quot;K2&quot;,28251,8611,1954,800,96
+## &quot;Kangchenjunga&quot;,28169,8586,1955,312,52
+## &quot;Lhotse&quot;,27940,8516,1956,933,33
+## &quot;Makalu&quot;,27838,8485,1955,560,48</code></pre>
 </div>
 <div id="knit-and-upload" class="section level2">
 <h2>Knit and Upload</h2>
