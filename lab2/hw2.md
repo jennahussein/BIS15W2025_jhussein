@@ -1,7 +1,7 @@
 ---
 title: "Homework 2"
 author: "Jenna Hussein"
-date: "2025-01-10"
+date: "2025-01-14"
 output:
   html_document: 
     theme: spacelab
@@ -87,48 +87,21 @@ mean(height_feet)
 
 ``` r
 first_climbed <- c(1953,1954,1955,1956,1955)
-data.frame(name,height_feet,height_meters,first_climbed)
-```
-
-```
-##            name height_feet height_meters first_climbed
-## 1 Mount_Everest       29032          8849          1953
-## 2            K2       28251          8611          1954
-## 3 Kangchenjunga       28169          8586          1955
-## 4        Lhotse       27940          8516          1956
-## 5        Makalu       27838          8485          1955
+mountains <- data.frame(name,height_feet,height_meters,first_climbed)
 ```
 
 **8. How many times have each of these mountains been climbed? Make a new vector `summits` and add it to the `mountains` data frame.**
 
 ``` r
 summits <- c(12884,800,312,933,560)
-data.frame(name,height_feet,height_meters,first_climbed,summits)
-```
-
-```
-##            name height_feet height_meters first_climbed summits
-## 1 Mount_Everest       29032          8849          1953   12884
-## 2            K2       28251          8611          1954     800
-## 3 Kangchenjunga       28169          8586          1955     312
-## 4        Lhotse       27940          8516          1956     933
-## 5        Makalu       27838          8485          1955     560
+mountains <- data.frame(name,height_feet,height_meters,first_climbed,summits)
 ```
 
 **9. Which mountain has the highest number of fatalities? Make a new vector `fatalities` and add it to the `mountains` data frame.**
 
 ``` r
 fatalities <- c(340,96,52,33,48)
-data.frame(name,height_feet,height_meters,first_climbed,summits,fatalities)
-```
-
-```
-##            name height_feet height_meters first_climbed summits fatalities
-## 1 Mount_Everest       29032          8849          1953   12884        340
-## 2            K2       28251          8611          1954     800         96
-## 3 Kangchenjunga       28169          8586          1955     312         52
-## 4        Lhotse       27940          8516          1956     933         33
-## 5        Makalu       27838          8485          1955     560         48
+mountains <- data.frame(name,height_feet,height_meters,first_climbed,summits,fatalities)
 ```
 Mount Everest has the highest number of fatalities
 **10. Write your data frame to a .csv file.**
@@ -138,12 +111,12 @@ write.csv(mountains, row.names = FALSE)
 ```
 
 ```
-## "name","height_feet","height_meters"
-## "Mount_Everest",29032,8849
-## "K2",28251,8611
-## "Kangchenjunga",28169,8586
-## "Lhotse",27940,8516
-## "Makalu",27838,8485
+## "name","height_feet","height_meters","first_climbed","summits","fatalities"
+## "Mount_Everest",29032,8849,1953,12884,340
+## "K2",28251,8611,1954,800,96
+## "Kangchenjunga",28169,8586,1955,312,52
+## "Lhotse",27940,8516,1956,933,33
+## "Makalu",27838,8485,1955,560,48
 ```
 
 ## Knit and Upload

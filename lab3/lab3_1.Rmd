@@ -27,11 +27,16 @@ During lab 2, you learned how to work with vectors and data frames. For the rema
 ## Review
 Below are data collected by three scientists (Jill, Steve, Susan in order) measuring temperatures of three hot springs near Mono Lake.
 ```{r}
+<<<<<<< HEAD
 temp <- c(36.25, 35.40, 35.30, 35.15, 35.35, 33.35, 30.70, 29.65, 29.20)
+=======
+temp <- c(36.25, 35.40, 35.30, 35.15, 35.35, 33.35, 30.70, 29.65, 29.20) 
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 name <- c("Jill", "Susan", "Steve", "Jill", "Susan", "Steve", "Jill", "Susan", "Steve")
 spring <- c("Buckeye", "Buckeye", "Buckeye", "Benton", "Benton", "Benton", "Travertine", "Travertine", "Travertine")
 ```
 
+<<<<<<< HEAD
 1. Build a data frame called `hsprings` with the above data. Name the temperature column `temp_C`. Print out the data frame.  
 
 2. Change the column titled `name` to `scientist`, leave the other column names the same. Print out the data frame names.  
@@ -41,6 +46,35 @@ spring <- c("Buckeye", "Buckeye", "Buckeye", "Benton", "Benton", "Benton", "Trav
 4. Calculate the mean temperature of all of the temperature measurements.
 
 5. Save your hot springs data as a `.csv` file! Do not allow row names. 
+=======
+1. Build a data frame called `hsprings` with the above data. Name the temperature column `temp_C`. Print out the data frame. 
+
+```{r}
+hsprings <- tibble(name, temp_C=temp, spring)
+hsprings
+```
+
+2. Change the column titled `name` to `scientist`, leave the other column names the same. Print out the data frame names.  
+```{r}
+hsprings <- tibble(scientist=name, temp_C=temp,spring)
+```
+
+3. Our scientists forgot to record the depth data for each spring. Here it is as a vector, add it as a new column called depth_ft: `c(4.15, 4.13, 4.12, 3.21, 3.23, 3.20, 5.67, 5.65, 5.66)`. Print out the data frame.
+```{r}
+depth_ft <- c(4.15, 4.13, 4.12, 3.21, 3.23, 3.20, 5.67, 5.65, 5.66)
+hsprings <- tibble(scientist=name, temp_C=temp,spring, depth_ft)
+```
+
+4. Calculate the mean temperature of all of the temperature measurements.
+```{r}
+mean(temp)
+```
+
+5. Save your hot springs data as a `.csv` file! Do not allow row names. 
+```{r}
+write.csv(hsprings, "hsprings.csv", row.names=F) #prevents R from adding a new column with numbers csv = comma-separated value
+```
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 
 6. Go to the environment panel and push the broom to clear your environment.  
 
@@ -68,7 +102,17 @@ hot_springs <- read_csv("hsprings_data.csv")
 
 Use the `str()` function to get an idea of the data structure of `hot_springs`.  
 ```{r}
+<<<<<<< HEAD
 str(hot_springs)
+=======
+str(hot_springs) #structure command
+```
+```{r}
+glimpse(hot_springs)
+```
+```{r}
+summary(hot_springs) #be careful with the math, it's not always accurate
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 ```
 
 What is the class of the scientist column? Change it to factor and then show the levels of that factor.  
@@ -77,19 +121,32 @@ class(hot_springs$scientist)
 ```
 
 ```{r}
+<<<<<<< HEAD
 hot_springs$scientist <- as.factor(hot_springs$scientist)
+=======
+hot_springs$scientist <- as.factor(hot_springs$scientist) #the scientist column in the hot spring data frame can be expressed as a factor
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 ```
 
 Change the class of the springs column to factor.
 ```{r}
+<<<<<<< HEAD
 hot_springs$spring <- as.factor(hot_springs$spring)
+=======
+hot_springs$spring <- as.factor(hot_springs$spring) #a factor is a data class that is a character but has limited types of observations that repeat
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 ```
 
 Did our changes work? 
 ```{r}
+<<<<<<< HEAD
 str(hot_springs)
 ```
 
+=======
+str(hot_springs) #scientist and spring category is not three things instead of 9? So if something repeats it doesn't count it more than once? idk?
+```
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 We can also check the levels of each column.
 ```{r}
 levels(hot_springs$scientist)
@@ -101,6 +158,13 @@ levels(hot_springs$spring)
 
 ## Practice
 1. As part of homework 2, you saved data on the five tallest mountains in the world. Reload that data below and use the `str()` function to explore it's structure.  
+<<<<<<< HEAD
+=======
+ˆ
+```{r}
+
+```
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 
 ## That's it! Let's take a break and then move on to part 2! 
 

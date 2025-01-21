@@ -26,7 +26,11 @@ Data: http://datadryad.org/resource/doi:10.5061/dryad.q5j65/1
 
 **1. Load the data into a new object called `homerange`.**
 ```{r}
+<<<<<<< HEAD
 homerange <- read_csv("data/Tamburelloetal_HomeRangeDatabase.csv")
+=======
+homerange <- read.csv("data/Tamburelloetal_HomeRangeDatabase.csv")
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 ```
 
 **2. What are the dimensions of the dataframe?**  
@@ -38,16 +42,27 @@ dim(homerange)
 ```{r}
 summary(homerange)
 ```
+<<<<<<< HEAD
 There are 502 NA's in the preymass column. Considering the negative minimum value in the log10.hra column, I assume some NA's in that column as well. Looking at the data there are also some NA's in the N column and the alternative mass reference.
  
+=======
+the preymass, log10.preymass, PPMR, N, and alternative mass reference variables all have NA values. 
+
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 **4. What are the names of the columns in the dataframe?**
 ```{r}
 names(homerange)
 ```
 
+<<<<<<< HEAD
 **5. Based on the summary output, do you see anything in the data that looks strange? Think like a biologist and consider the variables.** 
 
 Some columns have a negative minimum value for characteristics like mass which don't really make sense in the real world.
+=======
+**5. Based on the summary output, do you see anything in the data that looks strange? Think like a biologist and consider the variables.**  
+
+there are negative mass and preymass values which wouldn't make sense in the real world
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 
 **6. The `min` and `max` functions can be used to find the minimum and maximum values in a vector. Use these functions to find the minimum and maximum values for the variable `mean.mass.g`.**  
 ```{r}
@@ -57,27 +72,44 @@ max(homerange$mean.mass.g)
 
 **7. Change the class of the variables `taxon` and `order` to factors and display their levels.**  
 ```{r}
+<<<<<<< HEAD
 homerange$taxon <- as.factor(homerange$taxon)
 homerange$order <- as.factor(homerange$order)
 str(homerange)
+=======
+
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 ```
 
 **8. Use `select` to pull out the variables taxon and common.name.**  
 ```{r}
+<<<<<<< HEAD
 select(homerange, taxon, common.name)
+=======
+
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 ```
 
 **9. Use `filter` to pull out all mammals from the data.**
 ```{r}
+<<<<<<< HEAD
 filter(homerange, taxon=="mammals")
+=======
+
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 ```
 
 **10. What is the largest `mean.hra.m2` for mammals? This is a very large number! Which animal has this homerange? Look them up online and see if you can figure out why this number is so large.**
 ```{r}
+<<<<<<< HEAD
 max(homerange$mean.hra.m2)
 filter(homerange, mean.hra.m2==3550830977)
 ```
 The largest mean.hra.m2 is 3550830977 and it corresponds to the reindeer. I think the reason why this number is so large is because they require so much food for sufficient fuel so they need access to food during the different seasons as well. Their antlers alone are 400 inches long and they grow every day. Their antlers are the fastes growing tissue in the whole animal kingdom according to Dr. N. Isaac Bott, DVM. 
+=======
+
+```
+>>>>>>> 241a706ee42ddad584542ce1fc62a811c8acdfb4
 
 ## Knit and Upload
 Please knit your work as a .pdf or .html file and upload to Canvas. Homework is due before the start of the next lab. No late work is accepted. Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
