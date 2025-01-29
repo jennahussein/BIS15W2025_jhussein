@@ -44,14 +44,10 @@ superhero_info %>%
   filter(alignment=="bad")
 ```
 
-```{r}
-
-```
-
 3. How many distinct "races" are represented in `superhero_info`?
 ```{r}
 superhero_info %>% 
-  summarize(n_races=n_distinct(race))
+  summarize(n_races=n_distinct(race, na.rm=T))
 ```
 
 ## Good and Bad
@@ -68,24 +64,36 @@ bad_guys <- superhero_info %>%
 
 5. Who are the good Vampires?
 ```{r}
-
+good_guys %>% 
+  select(name, race, alignment) %>% 
+  filter(race=="Vampire")
 ```
 
 6. Who has the height advantage- bad guys or good guys? Convert their height to meters and sort from tallest to shortest.  
 ```{r}
-
+good_guys %>% 
+  mutate(height_meters = height/100) %>% 
+  select(name, height, height_meters) %>% 
+  arrange(-height_meters)
 ```
 
 ```{r}
-
+bad_guys %>% 
+  mutate(height_meters = height/100) %>% 
+  select(name, height, height_meters) %>% 
+  arrange(-height_meters)
 ```
+The good guys have a height advantage over the bad guys. The tallest good superhero is 9.75 meters and the tallest bad superhero is 3.66 meters.
 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
 
 7. How many superheros have a combination of agility, stealth, super_strength, and stamina?
 ```{r}
-
+superhero_powers %>% 
+  select(hero_names, agility, stealth, super_strength, stamina) %>% 
+  filter(agility=="TRUE", stealth=="TRUE", super_strength=="TRUE", stamina=="TRUE") %>% 
+  summarize(total=n())
 ```
 
 ```{r}
@@ -95,22 +103,28 @@ Have a quick look at the `superhero_powers` data frame.
 8. Who is the most powerful superhero? Have a look at the code chunk below. Use the internet to annotate each line of code so you know how it works. It's OK to use AI to help you with this task.
 ```{r}
 superhero_powers %>%
-  # calls the superhero_powers data frame
+  #calls the superhero_powers data frame
   mutate(across(-1, ~ ifelse(. == TRUE, 1, 0))) %>% 
+  #mutate all variables and observations within each variable except the first variable. The period tells R to evaluate all cells. If a cell says True, change its value to 1. If a cell says False, change its value to 0.
   mutate(total_powers = rowSums(across(-1))) %>% 
+  #make a new column called total_powers and have it's value be a sum of all the rows except for the first row.
   select(hero_names, total_powers) %>% 
+  #pull out only the hero_names and total_powers columns/variables from the data frame.
   arrange(-total_powers)
+  #sort the total_powers data in reverse order
 ```
 
 ## Your Favorite
 9. Pick your favorite superhero and let's see their powers!  
 ```{r}
-
+superhero_powers %>% 
+  filter(hero_names=="Batman")
 ```
 
 10. Can you find your hero in the superhero_info data? Show their info!  
 ```{r}
-
+superhero_info %>% 
+  filter(name=="Batman")
 ```
 
 ## Knit and Upload
