@@ -30,26 +30,28 @@ fisheries <- read_csv("data/fisheries.csv")
 
 1. Explore the data. What are the names of the variables, what are the dimensions, are there any NA's, what are the classes of the variables, etc.? You may use the functions that you prefer.
 ```{r}
-names(fisheries)
-dim(fisheries)
+#names(fisheries)
+#dim(fisheries)
 summary(fisheries)
-anyNA(fisheries)
-class(fisheries)
+#anyNA(fisheries)
+#class(fisheries)
 ```
 
 2. How many countries are represented in the data? Provide a count and list their names.
 ```{r}
 fisheries %>% 
-  count(country)
+  summarize(n_countries = n_distinct(country))
 ```
 
 ```{r}
-
+fisheries$country %>% 
+  unique()
 ```
 
 3. Based on the `asfis_species_number`, how many different fish species were caught?
 ```{r}
 fisheries %>% 
+  mutate(asfis_species_number=as.factor(asfis_species_number)) %>% 
   summarize(n_taxa=n_distinct(asfis_species_number))
 ```
 
@@ -64,8 +66,8 @@ fisheries %>%
 5. Based on the `asfis_species_name`, what are the top 5 most caught species? (note: "Osteichthyes" is not a species, it refers to unidentified fish. You should filter this one out.).
 ```{r}
 fisheries %>% 
-  group_by(asfis_species_name) %>% 
-  summarize(total_catch=sum(catch, na.rm = T)) %>% 
+  group_by(asfis_species_name, asfis_species_number) %>% 
+  summarize(total_catch=sum(catch, na.rm = T), .groups='keep') %>% 
   filter(asfis_species_name != "Osteichthyes") %>% 
   arrange(-total_catch)
 ```
@@ -74,39 +76,63 @@ fisheries %>%
 ```{r}
 fisheries %>% 
   group_by(country) %>% 
-  select(asfis_species_name) %>%
-  filter(asfis_species_name != "Osteichthyes") %>% 
-  arrange(-total_catch)
+  filter(asfis_species_name != "Engraulis ringens") %>% 
+  summarize(catch_total=sum(catch, na.rm=T)) %>% 
+  arrange(-catch_total)
 ```
 
 7. Which country had the largest overall catch between the years 2002-2012?
 ```{r}
-
+fisheries %>% 
+  group_by(country) %>% 
+  filter(year >= 2002 & year <= 2012) %>% 
+  summarize(total_catch = sum(catch, na.rm=T)) %>% 
+  arrange(-total_catch)
 ```
 
 8. Which country had the largest catch in a single year? What year was it? 
 ```{r}
-
+fisheries %>% 
+  group_by(country, year) %>% 
+  summarize(total_catch = sum(catch, na.rm=T), .groups = 'keep') %>% 
+  arrange(-total_catch)
 ```
 
 9. Fishing practices for sharks, rays, chimaeras and other cartilaginous fish (group 38) are of particular concern due to their conservation status. Make a new dataframe `sharks` that only contains data on this group. 
 ```{r}
-
+sharks <- fisheries %>% 
+  filter(isscaap_taxonomic_group == "Sharks, rays, chimaeras")
 ```
 
 10. Using the `sharks` dataframe, use `mutate()` to create a new column called `fishing_pressure` that is based on the total catch. If the total catch is greater than 75, the fishing pressure is considered "high", otherwise it is considered "moderate".
 ```{r}
-
+sharks %>% 
+  mutate(fishing_pressure = ifelse(catch > 75, "high", "moderate"))
 ```
 
 11. For sharks, how does the average catch differ between high and moderate fishing pressure?
 ```{r}
-
+sharks %>% 
+  mutate(fishing_pressure = ifelse(catch > 75, "high", "moderate")) %>% 
+  filter(catch > 0 | catch != "NA") %>% 
+  group_by(fishing_pressure) %>% 
+  summarize(avg_catch=mean(catch, na.rm=T)) 
 ```
 
-12. Perform one analysis of your choice on the fisheries dataframe that includes a minimum of three lines of code and two functions. Write a seentence or two that explains the intent of your code.
-```{r}
+12. Perform one analysis of your choice on the fisheries dataframe that includes a minimum of three lines of code and two functions. Write a sentence or two that explains the intent of your code.
 
+I wanted to find out the quantity of each taxonomic group that was caught in Lebanon. 
+
+```{r}
+Lebanon <- fisheries %>% 
+  group_by(country, isscaap_taxonomic_group) %>% 
+  summarize(total_catch = sum(catch, na.rm=T), .groups = 'keep')
+```
+```{r}
+Lebanon %>% 
+  group_by(isscaap_taxonomic_group) %>% 
+  filter(country == "Lebanon") %>% 
+  unique()
 ```
 
 ## Push your final code to GitHub!
