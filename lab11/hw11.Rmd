@@ -70,9 +70,8 @@ San Diego county has the highest number of incidents.
 sharks_no_unknowns %>% 
   group_by(month) %>% 
   summarise(incident_per_month = n_distinct(incident_num, na.rm = T)) %>% 
-  ggplot(aes(x = month, y = incident_per_month, fill = month))+
+  ggplot(aes(x = as.factor(month), y = incident_per_month, fill = month))+
   geom_col()+
-  coord_flip()+
   labs(title = "Shark Attacks per Month",
        x = "Month",
        y = "Incidents per Month")+
