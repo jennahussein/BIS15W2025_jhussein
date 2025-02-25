@@ -1,6 +1,6 @@
 ---
 title: "Lab 12 Homework"
-author: "Your Name Here"
+author: "Jenna Hussein"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -40,24 +40,157 @@ library("gapminder")
 
 1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine how NA's are treated in the data.   
 
-2. How many countries are represented in this dataset? Make a table and a plot that shows the number of countries by continent.  
+```{r}
+gapminder <- gapminder
+summary(gapminder)
+```
+
+2. How many countries are represented in this dataset? Make a table and a plot that shows the number of countries by continent. 
+
+```{r}
+gapminder %>% 
+  group_by(continent) %>% 
+  summarize(total_countries = n_distinct(country))
+```
+```{r}
+gapminder %>% 
+  group_by(continent) %>% 
+  summarize(total_countries = n_distinct(country)) %>% 
+  ggplot(aes(x = continent, y = total_countries, fill = continent))+
+  geom_col()+
+  labs(title = "Countries by Continent",
+       x = "Continents",
+       y = "Number of Countries")+
+  theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
+```
 
 3. Which country has the largest population growth since 1952? Show this as a table.  
 
+```{r}
+gapminder %>% 
+  select(pop, country, year) %>% 
+  mutate(year = as.factor(year)) %>% 
+  filter(year == "1952" | year == "2007") %>% 
+  pivot_wider(values_from = pop,
+              names_from = year) %>% 
+  rename(pop_1952 = "1952", pop_2007 = "2007") %>% 
+  mutate(pop_growth = pop_2007 - pop_1952) %>% 
+  arrange(-pop_growth)
+```
+China had the largest population growth since 1952.
 
 4. Make a plot that shows population growth for the country you found in question #3. This plot should show the change over time.  
 
+```{r}
+gapminder %>% 
+  filter(country == "China") %>% 
+  ggplot(aes(x = year, y = pop, color = country))+
+  geom_line()+
+  geom_point()+
+  labs(title = "Population Growth in China", x = "Year", y = "Population")+
+  theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
+```
+
 5. How has global life expectancy changed between 1952 and 2007? Show the min, mean, and max for all countries in the dataset. Show this as a table.  
+
+```{r}
+gapminder %>% 
+  group_by(country) %>% 
+  summarise(min_life_exp = min(lifeExp), max_life_exp = max(lifeExp), avg_life_exp = mean(lifeExp))
+```
+On average, global life expectancy has increased between 1952 and 2007.
 
 6. Make a plot that shows how mean life expectancy has changed over time for each continent. What is your interpretation of what happened in Africa between 1987 and 2002?  
 
+```{r}
+gapminder %>% 
+  group_by(continent, year) %>% 
+  summarise(min_life_exp = min(lifeExp), max_life_exp = max(lifeExp), avg_life_exp = mean(lifeExp), .groups = 'keep') %>% 
+  ggplot(aes(x = year, y = avg_life_exp, color = continent))+
+  geom_line()+
+  geom_point()+
+  labs(title = "Average Life Expectancy Over Time per Continent",
+       x = "Year",
+       y = "Average Life Expectancy (yrs)")+
+  theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
+```
+
+I would think something like a war or disease caused many people to lose their lives which would cause the life expectancy to be stagnant for a couple of years in Africa.
+
 7. We are interested in the relationship between per capita GDP and life expectancy; i.e. does having more money help you live longer? Show this as a plot.  
+
+```{r}
+gapminder %>% 
+  ggplot(aes(x = gdpPercap, y = lifeExp, color = continent))+
+  geom_point()+
+  geom_jitter()+
+  labs(title = "Per Capita GDP and Life Expectancy",
+       x = "Per Capita GDP",
+       y = "Life Expectancy")+
+  scale_x_log10()+
+  theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
+```
+
+There seems to be slight trend of higher per capita GDP being associated with higher life expectancy.
 
 8. Which five countries have had the highest GDP per capita growth over the years represented in this dataset? Show this as a table.  
 
+```{r}
+gapminder %>% 
+  select(gdpPercap, country, year) %>% 
+  mutate(year = as.factor(year)) %>% 
+  filter(year == "1952" | year == "2007") %>% 
+  pivot_wider(values_from = gdpPercap,
+              names_from = year) %>% 
+  rename(gdp_1952 = "1952", gdp_2007 = "2007") %>% 
+  mutate(gdp_growth = gdp_2007 - gdp_1952) %>% 
+  arrange(-gdp_growth) %>% 
+  top_n(5, gdp_growth)
+```
+Singapore, Norway, China, Ireland, and Austria have had the highest per gapita GDP growth over the years.
+
 9. How does per capita GDP growth compare between these same five countries? Show this as a plot.  
 
+```{r}
+gapminder %>% 
+ filter(country == "Singapore"|country == "Norway" | country == "Hong Kong, China" | country == "Ireland" | country == "Austria") %>% 
+  select(year, country, gdpPercap) %>% 
+  ggplot(aes(x = as.factor(year), y = gdpPercap, group = country, color = country))+
+  geom_line()+
+  labs(title = "GDP per Capita Growth",
+       x = "Year", 
+       y = "GDP per Capita")+
+  theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
+```
+
 10. Do one analysis of your choice that includes a table and plot as outputs.  
+Which European country has had the highest life expectancy increase from 1952 to 2007 and how did it change over time?
+```{r}
+gapminder %>% 
+  select(country, year, continent, lifeExp) %>% 
+  mutate(year = as.factor(year)) %>% 
+  filter(continent == "Europe") %>% 
+  filter(year == 1952 | year == 2007) %>%
+  group_by(year) %>% 
+  pivot_wider(names_from = year,
+              values_from = lifeExp) %>% 
+  rename(life_exp_1952 = "1952", life_exp_2007 = "2007") %>% 
+  mutate(life_exp_growth = life_exp_2007 - life_exp_1952) %>% 
+  arrange(-life_exp_growth)
+```
+Turkey is the European country that had the largest increase in life expectancy.
+
+```{r}
+gapminder %>% 
+  select(country, year, continent, lifeExp) %>% 
+  filter(country == "Turkey") %>% 
+  group_by(year) %>% 
+  ggplot(aes(x = year, y = lifeExp, color = country))+
+  geom_point()+
+  geom_line()
+```
+
+It had a relatively steady upwards incline in life expectancy ever since 1952.
 
 ## Knit and Upload
 Please knit your work as a .pdf or .html file and upload to Canvas. Homework is due before the start of the next lab. No late work is accepted. Make sure to use the formatting conventions of RMarkdown to make your report neat and clean! 
